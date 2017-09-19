@@ -14,7 +14,7 @@ PROG = tp1
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = multimedia.cpp picture.cpp main.cpp
+SOURCES = multimedia.cpp video.cpp picture.cpp main.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -51,6 +51,7 @@ LDLIBS =
 # Regles de construction/destruction des .o et de l'executable
 # depend-${PROG} sera un fichier contenant les dependances
 #
+.PHONY: doc
  
 all: ${PROG} doc
 

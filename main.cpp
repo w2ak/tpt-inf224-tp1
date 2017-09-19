@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include "picture.h"
+#include "video.h"
 using namespace std;
 
 /**
@@ -24,5 +25,10 @@ int main() {
   p->print(s);
   cerr << s.str() << endl;
   p->open();
+  s.str(string());
+  Video * v = new Video();
+  v->print(s);
+  cerr << s.str() << endl;
+  v->open();
   return 0;
 }
