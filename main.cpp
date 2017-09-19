@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include <sstream>
+#include "picture.h"
 using namespace std;
 
 /**
@@ -18,6 +19,10 @@ using namespace std;
  * \return 0
  */
 int main() {
-  cout << "Hello world" << endl;
+  stringstream s;
+  Picture * p = new Picture();
+  p->print(s);
+  cerr << s.str() << endl;
+  p->open();
   return 0;
 }
