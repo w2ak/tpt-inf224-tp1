@@ -1,98 +1,68 @@
-##########################################
-#
-#  Exemple de Makefile
-#  Eric Lecolinet - Reda Dehak - Telecom ParisTech 2015
-#  INF224 - TP C++ - http://www.telecom-paristech.fr/~elc/inf224
-#
-##########################################
+PROGNAME = tp1
+PROG     = ${PROGNAME}
 
-#
-# Nom du programme
-#
-PROG = tp1
+SRCDIR   = src
+DOCDIR   = doc
+RLSDIR   = release
+MEDIADIR = media
 
-#
-# Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
-#
-SOURCES = multimedia.cpp video.cpp picture.cpp main.cpp
-FILES = multimedia.h video.h picture.h Makefile README.md
-MEDIA = small.mp4 small.jpg
+RELEASE  = ${RLSDIR}/${PROGNAME}.tar.gz
 
-#
-# Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
-#
-OBJETS = ${SOURCES:%.cpp=%.o}
+MAIN     = ${SRCDIR}/main.cpp
+SOURCESF = multimedia.cpp video.cpp picture.cpp
+SOURCES  = ${SOURCESF:%=${SRCDIR}/%}
+HEADERS := ${SOURCES:%.cpp=%.h}
+SOURCES += ${MAIN}
+OBJETS   = ${SOURCES:%.cpp=%.o}
 
-#
-# Compilateur C++
-#
-CXX = c++
+AUXFILES = Makefile README.md LICENSE
+MEDIAF   = small.mp4 small.jpg
+MEDIA    = ${MEDIAF:%=${MEDIADIR}/%}
 
-#
-# Options du compilateur C++
-#   -g pour debugger, -O optimise, -Wall affiche les erreurs, -I pour les headers
-#   -std=c++11 pour C++11
-# Exemple: CXXFLAGS= -std=c++11 -Wall -O -I/usr/local/qt/include
-#
+FILES    = ${PROGNAME} ${DOCDIR} ${SOURCES} ${HEADERS} ${AUXFILES} ${MEDIA}
+
+CXX      = c++
 CXXFLAGS = -std=c++11 -Wall -g
+LDFLAGS  =
+LDLIBS   =
 
-#
-# Options de l'editeur de liens
-#
-LDFLAGS = 
+.PHONY: all run ${DOCDIR} ${MEDIADIR} ${RLSDIR} clean cleandist
 
-#
-# Librairies a utiliser
-# Exemple: LDLIBS = -L/usr/local/qt/lib -lqt
-#
-LDLIBS = 
-
-
-##########################################
-#
-# Regles de construction/destruction des .o et de l'executable
-# depend-${PROG} sera un fichier contenant les dependances
-#
-.PHONY: doc all doc-extensive run clean clean-all media
- 
-all: ${PROG} doc
-
-doc: Doxyfile
-	doxygen $<
-
-doc-extensive: doc
-	make -C doc/latex
+all: ${PROG}
 
 run: ${PROG}
-	./${PROG}
+	./$<
+
+${DOCDIR}: Doxyfile
+	doxygen $<
 
 ${PROG}: depend-${PROG} ${OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
 
 clean:
-	-@$(RM) *.o depend-${PROG} core 1>/dev/null 2>&1
+	-@$(RM) ${OBJETS} depend-${PROG} core 1>/dev/null 2>&1
 
-clean-all: clean
+cleandist: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
-	-@$(RM) -rf doc
-	-@$(RM) ${MEDIA}
-	-@$(RM) ${PROG}.tar.gz
+	-@$(RM) -rf ${RLSDIR} ${DOCDIR} ${MEDIADIR}
 
-media: ${MEDIA}
+${MEDIADIR}: ${MEDIA}
 
 ${MEDIA}:
+	@mkdir -p ${@D}
 	curl -s "http://www.neze.fr/public/tpt/inf224/$@" -o $@
 
-release: ${PROG}.tar.gz
+${RLSDIR}: ${RELEASE}
 
-${PROG}.tar.gz: ${PROG} ${SOURCES} ${FILES} media doc
-	tar czf $@ doc ${MEDIA} ${PROG} ${SOURCES} ${FILES}
+${RELEASE}: ${FILES}
+	@mkdir -p ${@D}
+	tar czf $@ $^
 
-# Gestion des dependances : creation automatique des dependances en utilisant 
+# Gestion des dependances : creation automatique des dependances en utilisant
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
 #
 depend-${PROG}:
-	${CXX} ${CXXFLAGS} -MM ${SOURCES} > depend-${PROG}
+	@${CXX} ${CXXFLAGS} -MM ${SOURCES} > depend-${PROG}
 
 
 ###########################################

@@ -22,12 +22,12 @@ using namespace std;
 int main() {
   Multimedia ** m = new Multimedia * [6];
   stringstream s;
-  m[0] = new Video("small vid","small.mp4",180);                  // Existing video
-  m[1] = new Picture("small pic","small.jpg",48.856638,2.352241); // Existing picture
-  m[2] = new Video("null vid","null.mp4",42);                     // Non-existing video
-  m[3] = new Picture("null pic","null.jpg",13.37,3.14159265);     // Non-existing picture
-  m[4] = new Video();                                             // Null video
-  m[5] = new Picture();                                           // Null picture
+  m[0] = new Video("small vid","media/small.mp4",180);                  // Existing video
+  m[1] = new Picture("small pic","media/small.jpg",48.856638,2.352241); // Existing picture
+  m[2] = new Video("null vid","null.mp4",42);                           // Non-existing video
+  m[3] = new Picture("null pic","null.jpg",13.37,3.14159265);           // Non-existing picture
+  m[4] = new Video();                                                   // Null video
+  m[5] = new Picture();                                                 // Null picture
   for (int i=0; i<6; i++) {
     s.str(string());
     m[i]->print(s);

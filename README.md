@@ -13,23 +13,13 @@ TP n° 1
 ## Build the program
 
 ```
-make tp1
+make
 ```
 
 ## Build the documentation
 
 ```
 make doc
-```
-
-```
-make doc-extensive
-```
-
-## Build the program and the documentation
-
-```
-make
 ```
 
 ## Download the media files
@@ -58,6 +48,10 @@ chromium-browser doc/html/index.html
 
 ```
 make clean
+```
+
+```
+make cleandist
 ```
 
 ## Create release archive
