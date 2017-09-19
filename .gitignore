@@ -35,3 +35,8 @@ tp1
 
 # Documentation
 doc/
+
+# Binaries
+*.mp4
+*.jpg
+*.tar.gz

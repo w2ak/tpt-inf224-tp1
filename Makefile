@@ -15,6 +15,8 @@ PROG = tp1
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
 SOURCES = multimedia.cpp video.cpp picture.cpp main.cpp
+FILES = multimedia.h video.h picture.h Makefile README.md
+MEDIA = small.mp4 small.jpg
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -51,7 +53,7 @@ LDLIBS =
 # Regles de construction/destruction des .o et de l'executable
 # depend-${PROG} sera un fichier contenant les dependances
 #
-.PHONY: doc
+.PHONY: doc all doc-extensive run clean clean-all media
  
 all: ${PROG} doc
 
@@ -73,6 +75,18 @@ clean:
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
 	-@$(RM) -rf doc
+	-@$(RM) ${MEDIA}
+	-@$(RM) ${PROG}.tar.gz
+
+media: ${MEDIA}
+
+${MEDIA}:
+	curl -s "http://www.neze.fr/public/tpt/inf224/$@" -o $@
+
+release: ${PROG}.tar.gz
+
+${PROG}.tar.gz: ${PROG} ${SOURCES} ${FILES} media doc
+	tar czf $@ doc ${MEDIA} ${PROG} ${SOURCES} ${FILES}
 
 # Gestion des dependances : creation automatique des dependances en utilisant 
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)

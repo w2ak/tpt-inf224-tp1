@@ -32,6 +32,12 @@ make doc-extensive
 make
 ```
 
+## Download the media files
+
+```
+make media
+```
+
 ## Run the program
 
 ```
@@ -52,4 +58,10 @@ chromium-browser doc/html/index.html
 
 ```
 make clean
+```
+
+## Create release archive
+
+```
+make release
 ```
