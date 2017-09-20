@@ -41,7 +41,7 @@ public:
     duration = _duration;
   };
 
-  ~Video() {};
+  virtual ~Video() {};
 
   /**
    * \fn void setDuration (int _duration)

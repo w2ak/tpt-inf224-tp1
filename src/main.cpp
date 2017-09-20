@@ -10,30 +10,36 @@
  */
 #include <iostream>
 #include <sstream>
+#include <assert.h>
 #include "picture.h"
 #include "video.h"
+#include "movie.h"
+
 using namespace std;
 
 /**
  * \fn int main (void)
- * \brief Creates, opens and deletes a list of Multimedia objects.
+ * \brief Creates a movie, changes chapter lengths and observes.
  * \return 0
  */
 int main() {
-  Multimedia ** m = new Multimedia * [6];
+#define N 10
+  int* c = new int[N];
+  for (int i=0; i<N; c[i] = i, i++);
+  Movie * m = new Movie();
+  assert(m->getChapterCount() == 0);
+  m->setChapters(c,N);
+  assert(m->getChapterCount() == N);
+  for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
+  for (int i=0; i<N; c[i] += N, i++);
+  for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
+  for (int i=0; i<N; c[i] += N, i++);
+  for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
+  delete[] c;
+  for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
   stringstream s;
-  m[0] = new Video("small vid","media/small.mp4",180);                  // Existing video
-  m[1] = new Picture("small pic","media/small.jpg",48.856638,2.352241); // Existing picture
-  m[2] = new Video("null vid","null.mp4",42);                           // Non-existing video
-  m[3] = new Picture("null pic","null.jpg",13.37,3.14159265);           // Non-existing picture
-  m[4] = new Video();                                                   // Null video
-  m[5] = new Picture();                                                 // Null picture
-  for (int i=0; i<6; i++) {
-    s.str(string());
-    m[i]->print(s);
-    cerr << i << ": " << s.str() << endl;
-    m[i]->open();
-  }
-  delete[] m;
+  m->print(s);
+  cerr << s.str() << endl;
   return 0;
+#undef N
 }

@@ -69,3 +69,9 @@ The `open` method in `Multimedia` will be virtual, which makes it impossible to 
 ## Step 5
 
 Polymorphism is used to make the treatment independant of the subclass. Destructors of polymorphic classes must be virtual.
+
+## Step 6
+
+To avoid encapsulation problems, the problem was solved as follows:
+* `setChapters([...],n)` copies the array instead of just getting the pointer
+* `getChapter(i)` gives only the length of one chapter. It is given by value and not reference.
