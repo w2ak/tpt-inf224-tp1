@@ -81,3 +81,10 @@ To avoid encapsulation problems, the problem was solved as follows:
 In the code, almost every object field is correctly destroyed when an object is destroyed. The only problematic field is the chapter array in `Movie` objects, which has to be created and should then be destroyed when a Movie object is destroyed or when the chapters list is changed.
 
 Therefore, if you change the code of `Movie`, copy a `Movie` object then destroy one of theese two objects, you will destroy the chapter list in the second object that you did not destroyed. Furthermore you will probably have a segmentation fault when trying to destroy the second `Movie` object and destroying the chapters list a second time.
+
+## Step 8
+
+Template specialization was used to create `Group<X>` for `X` a subclass of Multimedia.
+We have to create this class as a subclass of `list<X*>` and not `list<X>` for two reasons:
+* Multimedia objects can be members of multiple groups.
+* `list<Multimedia>` is virtual and would not allow us to create groups of Videos and Pictures in the same group.

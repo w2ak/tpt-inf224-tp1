@@ -9,7 +9,7 @@ MEDIADIR = media
 RELEASE  = ${RLSDIR}/${PROGNAME}.tar.gz
 
 MAIN     = ${SRCDIR}/main.cpp
-SOURCESF = multimedia.cpp video.cpp movie.cpp picture.cpp
+SOURCESF = group.cpp multimedia.cpp video.cpp movie.cpp picture.cpp
 SOURCES  = ${SOURCESF:%=${SRCDIR}/%}
 HEADERS := ${SOURCES:%.cpp=%.h}
 SOURCES += ${MAIN}
