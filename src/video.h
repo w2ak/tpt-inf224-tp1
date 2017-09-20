@@ -41,6 +41,8 @@ public:
     duration = _duration;
   };
 
+  ~Video() {};
+
   /**
    * \fn void setDuration (int _duration)
    * \brief Changes the video duration.

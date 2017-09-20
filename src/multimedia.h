@@ -50,7 +50,7 @@ public:
   /**
    * \brief Destructor
    */
-  ~Multimedia() {};
+  virtual ~Multimedia() {};
 
   /**
    * \fn void setPath (string p)

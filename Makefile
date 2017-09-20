@@ -50,7 +50,7 @@ ${MEDIADIR}: ${MEDIA}
 
 ${MEDIA}:
 	@mkdir -p ${@D}
-	curl -s "http://www.neze.fr/public/tpt/inf224/$@" -o $@
+	curl -Ls "https://www.neze.fr/public/tpt/inf224/$@" -o $@
 
 ${RLSDIR}: ${RELEASE}
 

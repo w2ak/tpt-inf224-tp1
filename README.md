@@ -59,3 +59,13 @@ make cleandist
 ```
 make release
 ```
+
+# Notes about the practical
+
+## Step 4
+
+The `open` method in `Multimedia` will be virtual, which makes it impossible to instantiate `Multimedia` objects.
+
+## Step 5
+
+Polymorphism is used to make the treatment independant of the subclass. Destructors of polymorphic classes must be virtual.

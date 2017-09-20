@@ -45,6 +45,8 @@ public:
     longitude = lon;
   };
 
+  ~Picture() {};
+
   /**
    * \fn void setPosition (double lat, double lon)
    * \brief Changes the picture location.
