@@ -15,17 +15,35 @@
 using namespace std;
 
 /**
- * \class Class for groups of objects.
- * \brief Class for generic group files.
+ * \class Group group.h group.cpp
+ * \class Class for groups of Multimedia objects.
  */
-template <class X, bool = is_base_of<Multimedia,X>::value> class Group : public list<X*> {
-public:
-  void foo() { cerr << "no" << endl; };
-};
+template <class X, bool = is_base_of<Multimedia,X>::value> class Group : public list<X*> {};
 
 template <class X> class Group<X,true> : public list<X*> {
+private:
+  string name = "noname"; /**< Name of the group */
 public:
-  void foo() { cerr << "yes" << endl; };
+  Group() : list<X*>() {};
+  Group(string n) : list<X*>() { name=n; }
+
+  ~Group() {};
+
+  void setName(string n) { name=n; };
+  string getName() const { return name; };
+
+  /**
+   * \fn void print (ostream& s) const
+   * \brief Prints the group elements to s.
+   * \param s: an output stream.
+   */
+  void print(ostream& s) const {
+    s << "Group(" << name << ")" << endl;
+    class list<X*>::const_iterator b = this->cbegin(), e = this->cend();
+    for (; b!=e; ++b) {
+      (*b)->print(s); s << endl;
+    }
+  };
 };
 
 #endif
