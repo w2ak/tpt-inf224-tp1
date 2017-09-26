@@ -18,9 +18,7 @@ using namespace std;
  * \class Group group.h group.cpp
  * \class Class for groups of Multimedia objects.
  */
-template <class X, bool = is_base_of<Multimedia,X>::value> class Group : public list<X*> {};
-
-template <class X> class Group<X,true> : public list<X*> {
+template <class X> class Group: public list<X*> {
 private:
   string name = "noname"; /**< Name of the group */
 public:

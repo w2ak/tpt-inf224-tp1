@@ -84,7 +84,11 @@ Therefore, if you change the code of `Movie`, copy a `Movie` object then destroy
 
 ## Step 8
 
-Template specialization was used to create `Group<X>` for `X` a subclass of Multimedia.
+Template specialization was used to create `Group<X>` for `X` a subclass of `Multimedia`.
 We have to create this class as a subclass of `list<X*>` and not `list<X>` for two reasons:
 * Multimedia objects can be members of multiple groups.
 * `list<Multimedia>` is virtual and cannot be instantiated. This would not allow us to create groups of Videos and Pictures in the same group.
+
+### Step 8.1
+
+Template specialization was not needed. We do not need the program to work if someones tries to use `Group<X>` for `X` not a subclass of `Multimedia`.
