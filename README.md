@@ -98,3 +98,5 @@ Template specialization was not needed. We do not need the program to work if so
 Added a few corrections. By using `const` it is possible to tell the compiler when something should not be (or will not be) modified.
 
 ## Step 9
+
+Shared pointers allow memory to be managed correctly. `Group` is now a list of shared pointers. This way, even though groups can share `Multimedia` objects, these objects are only deleted when they are not used anymore.

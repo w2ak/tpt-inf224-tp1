@@ -26,12 +26,12 @@ typedef shared_ptr<Multimedia> mptr;
  */
 int main() {
 #define N 30
-  mptr ** m = new mptr * [N];
+  mptr * m = new mptr [N];
   for (int i=0; i<N; i+=3) {
     stringstream ss; ss << i;
-    m[i] = new mptr(new Video(ss.str(),"/dev/null",0));
-    m[i+1] = new mptr(new Movie(ss.str(),"/dev/null",0));
-    m[i+2] = new mptr(new Picture(ss.str(),"/dev/null",0,0));
+    m[i] = mptr(new Video(ss.str(),"/dev/null",0));
+    m[i+1] = mptr(new Movie(ss.str(),"/dev/null",0));
+    m[i+2] = mptr(new Picture(ss.str(),"/dev/null",0,0));
   }
   Group<Multimedia> ** g = new Group<Multimedia> * [3];
   g[0] = new Group<Multimedia>("first one");
@@ -40,7 +40,7 @@ int main() {
   int x;
   for (int i=0; i<3; i++) {
     x = 6 + (((11-3*i)*i)>>1);
-    for (int j=0; j<N; j+=x) g[i]->push_back(*m[j]);
+    for (int j=0; j<N; j+=x) g[i]->push_back(m[j]);
   }
   for (int k=0; k<3; k++) {
     for (int i=k; i<3; i++) {
@@ -50,10 +50,9 @@ int main() {
     delete g[k];
   }
   for (int i=0; i<N; i+=3)
-    cerr << m[i]->use_count() << " ";
+    cerr << m[i].use_count() << " ";
   cerr << endl;
   delete[] g;
-  for (int i=0; i<N; i++) delete m[i];
   delete[] m;
   return 0;
 #undef N
