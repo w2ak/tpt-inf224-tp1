@@ -27,6 +27,7 @@ int main() {
   int* c = new int[N];
   for (int i=0; i<N; c[i] = i, i++);
   Movie * m = new Movie();
+  m->setName("first movie");
   assert(m->getChapterCount() == 0);
   m->setChapters(c,N);
   assert(m->getChapterCount() == N);
@@ -37,8 +38,17 @@ int main() {
   for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
   delete[] c;
   for (int i=0; i<N; i++) assert(m->getChapter(i+1)==i);
+  Movie * m2 = new Movie(*m);
+  m2->setName("copy of first movie");
   stringstream s;
   m->print(s);
+  cerr << s.str() << endl;
+  s.str("");
+  m2->print(s);
+  cerr << s.str() << endl;
+  s.str("");
+  delete m;
+  m2->print(s);
   cerr << s.str() << endl;
   return 0;
 #undef N

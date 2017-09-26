@@ -75,3 +75,9 @@ Polymorphism is used to make the treatment independant of the subclass. Destruct
 To avoid encapsulation problems, the problem was solved as follows:
 * `setChapters([...],n)` copies the array instead of just getting the pointer
 * `getChapter(i)` gives only the length of one chapter. It is given by value and not reference.
+
+## Step 7
+
+In the code, almost every object field is correctly destroyed when an object is destroyed. The only problematic field is the chapter array in `Movie` objects, which has to be created and should then be destroyed when a Movie object is destroyed or when the chapters list is changed.
+
+Therefore, if you change the code of `Movie`, copy a `Movie` object then destroy one of theese two objects, you will destroy the chapter list in the second object that you did not destroyed. Furthermore you will probably have a segmentation fault when trying to destroy the second `Movie` object and destroying the chapters list a second time.

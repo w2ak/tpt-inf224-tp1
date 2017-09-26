@@ -38,6 +38,19 @@ public:
   Movie(string _name, string _path, int _duration):
   Video(_name,_path,_duration) {};
 
+  /**
+   * \brief Copy Constructor
+   *
+   * Copies a movie object.
+   *
+   * \param obj: the original Movie object.
+   */
+  Movie(const Movie &obj):Video(obj) {
+    chapn = 0;
+    if (obj.chapters != nullptr)
+      this->setChapters(obj.chapters, obj.chapn);
+  };
+
   ~Movie() { if (chapters!=nullptr) delete[] chapters; };
 
   /**
