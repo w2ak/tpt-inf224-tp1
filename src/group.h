@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include <list>
+#include <memory>
 #include "multimedia.h"
 
 using namespace std;
@@ -18,12 +19,12 @@ using namespace std;
  * \class Group group.h group.cpp
  * \class Class for groups of Multimedia objects.
  */
-template <class X> class Group: public list<X*> {
+template <class X> class Group: public list<shared_ptr<X>> {
 private:
   string name = string(); /**< Name of the group */
 public:
-  Group() : list<X*>() {};
-  Group(string n) : list<X*>() { name=n; }
+  Group() : list<shared_ptr<X>>() {};
+  Group(string n) : list<shared_ptr<X>>() { name=n; }
 
   ~Group() {};
 
@@ -37,9 +38,9 @@ public:
    */
   void print(ostream& s) const {
     s << "Group(" << name << ")" << endl;
-    class list<X*>::const_iterator b = this->cbegin(), e = this->cend();
+    class list<shared_ptr<X>>::const_iterator b = this->cbegin(), e = this->cend();
     for (; b!=e; ++b) {
-      (*b)->print(s); s << endl;
+      (*b)->print(s); s << " (used by " << (*b).use_count() << ")" << endl;
     }
   };
 };
