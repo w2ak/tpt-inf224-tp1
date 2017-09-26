@@ -49,7 +49,8 @@ int main() {
     delete g[k];
   }
   delete[] g;
-  for (int i=0; i<N; i++) delete m[i]; delete[] m;
+  for (int i=0; i<N; i++) delete m[i];
+  delete[] m;
   return 0;
 #undef N
 }

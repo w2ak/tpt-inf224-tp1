@@ -6,7 +6,8 @@ DOCDIR   = doc
 RLSDIR   = release
 MEDIADIR = media
 
-RELEASE  = ${RLSDIR}/${PROGNAME}.tar.gz
+TAG     ?= v0
+RELEASE  = ${RLSDIR}/${PROGNAME}${TAG}.tar.gz
 
 MAIN     = ${SRCDIR}/main.cpp
 SOURCESF = multimedia.cpp video.cpp movie.cpp picture.cpp
@@ -45,7 +46,7 @@ clean:
 
 cleandist: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
-	-@$(RM) -rf ${RLSDIR} ${DOCDIR} ${MEDIADIR}
+	-@$(RM) -rf ${DOCDIR} ${MEDIADIR}
 
 ${MEDIADIR}: ${MEDIA}
 
