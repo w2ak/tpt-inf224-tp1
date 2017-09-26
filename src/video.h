@@ -23,9 +23,7 @@ public:
    *
    * Creates an uninitialized video object.
    */
-  Video():Multimedia() {
-    duration = -1;
-  };
+  Video():Multimedia() { duration = -1; };
 
   /**
    * \brief Constructor

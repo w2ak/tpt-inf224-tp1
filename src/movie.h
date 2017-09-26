@@ -51,7 +51,7 @@ public:
       this->setChapters(obj.chapters, obj.chapn);
   };
 
-  ~Movie() { if (chapters!=nullptr) delete[] chapters; };
+  ~Movie() { delete[] chapters; };
 
   /**
    * \fn void setChapters (int _duration)
@@ -59,7 +59,7 @@ public:
    * \param _chapters: new list of durations.
    * \param _chapn: number of chapters.
    */
-  void setChapters(int* chapters, int chapn);
+  void setChapters(const int* chapters, unsigned int chapn);
 
   /**
    * \fn int getChapterCount (void)

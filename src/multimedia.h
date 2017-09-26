@@ -20,18 +20,15 @@ using namespace std;
 class Multimedia {
 protected:
   bool initialized = false; /**< true iff the path has been initialized */
-  string name;              /**< human readable name */
-  string path;              /**< path of the media file */
+  string name = string();   /**< human readable name */
+  string path = string();   /**< path of the media file */
 public:
   /**
    * \brief Constructor
    *
    * Creates an uninitialized media object.
    */
-  Multimedia() {
-    name = "null";
-    path = "/dev/null";
-  };
+  Multimedia() {};
 
   /**
    * \brief Constructor

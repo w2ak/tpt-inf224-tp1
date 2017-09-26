@@ -20,7 +20,7 @@ using namespace std;
  */
 template <class X> class Group: public list<X*> {
 private:
-  string name = "noname"; /**< Name of the group */
+  string name = string(); /**< Name of the group */
 public:
   Group() : list<X*>() {};
   Group(string n) : list<X*>() { name=n; }

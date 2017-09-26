@@ -92,3 +92,7 @@ We have to create this class as a subclass of `list<X*>` and not `list<X>` for t
 ### Step 8.1
 
 Template specialization was not needed. We do not need the program to work if someones tries to use `Group<X>` for `X` not a subclass of `Multimedia`.
+
+### Step 8.2
+
+Added a few corrections. By using `const` it is possible to tell the compiler when something should not be (or will not be) modified.

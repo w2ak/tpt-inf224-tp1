@@ -1,11 +1,10 @@
 #include <cstdlib>
 #include "movie.h"
 
-void Movie::setChapters(int* c, int n) {
-  if (chapters != nullptr)
-    delete[] chapters;
+void Movie::setChapters(const int* c, unsigned int n) {
+  delete[] chapters;
   chapters = new int [n];
-  for (int i=0; i<n; i++) chapters[i] = c[i];
+  for (unsigned int i=0; i<n; i++) chapters[i] = c[i];
   chapn = n;
 }
 
