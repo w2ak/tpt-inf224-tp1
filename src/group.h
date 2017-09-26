@@ -16,7 +16,7 @@
 using namespace std;
 
 /**
- * \class Group group.h group.cpp
+ * \class Group group.h
  * \class Class for groups of Multimedia objects.
  */
 template <class X> class Group: public list<shared_ptr<X>> {

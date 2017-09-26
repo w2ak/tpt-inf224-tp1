@@ -11,7 +11,7 @@ RELEASE  = ${RLSDIR}/${PROGNAME}${TAG}.tar.gz
 
 MAIN     = ${SRCDIR}/main.cpp
 SOURCESF = multimedia.cpp video.cpp movie.cpp picture.cpp
-HEADERSF = multimedia.h   video.h   movie.h   picture.h   group.h
+HEADERSF = multimedia.h   video.h   movie.h   picture.h   group.h   library.h
 SOURCES := ${SOURCESF:%=${SRCDIR}/%}
 HEADERS := ${HEADERSF:%=${SRCDIR}/%}
 SOURCES += ${MAIN}

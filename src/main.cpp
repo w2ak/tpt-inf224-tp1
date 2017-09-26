@@ -15,9 +15,10 @@
 #include "video.h"
 #include "movie.h"
 #include "group.h"
+#include "library.h"
 
 using namespace std;
-typedef shared_ptr<Multimedia> mptr;
+//typedef shared_ptr<Multimedia> mptr;
 
 /**
  * \fn int main (void)
@@ -25,35 +26,6 @@ typedef shared_ptr<Multimedia> mptr;
  * \return 0
  */
 int main() {
-#define N 30
-  mptr * m = new mptr [N];
-  for (int i=0; i<N; i+=3) {
-    stringstream ss; ss << i;
-    m[i] = mptr(new Video(ss.str(),"/dev/null",0));
-    m[i+1] = mptr(new Movie(ss.str(),"/dev/null",0));
-    m[i+2] = mptr(new Picture(ss.str(),"/dev/null",0,0));
-  }
-  Group<Multimedia> ** g = new Group<Multimedia> * [3];
-  g[0] = new Group<Multimedia>("first one");
-  g[1] = new Group<Multimedia>("second one");
-  g[2] = new Group<Multimedia>("third one");
-  int x;
-  for (int i=0; i<3; i++) {
-    x = 6 + (((11-3*i)*i)>>1);
-    for (int j=0; j<N; j+=x) g[i]->push_back(m[j]);
-  }
-  for (int k=0; k<3; k++) {
-    for (int i=k; i<3; i++) {
-      g[i]->print(cerr);
-      cerr << "------" << endl;
-    }
-    delete g[k];
-  }
-  for (int i=0; i<N; i+=3)
-    cerr << m[i].use_count() << " ";
-  cerr << endl;
-  delete[] g;
-  delete[] m;
+  Library lib;
   return 0;
-#undef N
 }
