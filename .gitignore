@@ -32,6 +32,8 @@ depend-*
 *.out
 *.app
 tp1
+client
+server
 
 # Documentation
 doc/

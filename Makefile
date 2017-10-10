@@ -1,5 +1,7 @@
-PROGNAME = tp1
-PROG     = ${PROGNAME}
+PROG     = tp1
+SRV      = server
+CLI      = client
+EXE     := ${PROG} ${SRV} ${CLI}
 
 SRCDIR   = src
 DOCDIR   = doc
@@ -7,45 +9,71 @@ RLSDIR   = release
 MEDIADIR = media
 
 TAG     ?= v0
-RELEASE  = ${RLSDIR}/${PROGNAME}${TAG}.tar.gz
+RELEASE  = ${RLSDIR}/${PROG}${TAG}.tar.gz
 
-MAIN     = ${SRCDIR}/main.cpp
-SOURCESF = multimedia.cpp video.cpp movie.cpp picture.cpp
-HEADERSF = multimedia.h   video.h   movie.h   picture.h   group.h   library.h
-SOURCES := ${SOURCESF:%=${SRCDIR}/%}
-HEADERS := ${HEADERSF:%=${SRCDIR}/%}
-SOURCES += ${MAIN}
-OBJETS   = ${SOURCES:%.cpp=%.o}
+MAIN_SOURCES  = main.cpp multimedia.cpp video.cpp movie.cpp picture.cpp
+MAIN_HEADERS  =          multimedia.h   video.h   movie.h   picture.h   group.h   library.h
+MAIN_SOURCES := ${MAIN_SOURCES:%=${SRCDIR}/%}
+SOURCES      += ${MAIN_SOURCES}
+HEADERS      += ${MAIN_HEADERS:%=${SRCDIR}/%}
+MAIN_OBJECTS  = ${MAIN_SOURCES:%.cpp=%.o}
+OBJECTS      += ${MAIN_OBJECTS}
+
+CLI_SOURCES   = client.cpp cppsocket.cpp
+CLI_HEADERS   =            cppsocket.h
+CLI_SOURCES  := ${CLI_SOURCES:%=${SRCDIR}/%}
+SOURCES      += ${CLI_SOURCES}
+HEADERS      += ${CLI_HEADERS:%=${SRCDIR}/%}
+CLI_OBJECTS   = ${CLI_SOURCES:%.cpp=%.o}
+OBJECTS      += ${CLI_OBJECTS}
+
+SRV_SOURCES   = server.cpp tcpserver.cpp cppsocket.cpp
+SRV_HEADERS   =            tcpserver.h   cppsocket.h
+SRV_SOURCES  := ${SRV_SOURCES:%=${SRCDIR}/%}
+SOURCES      += ${SRV_SOURCES}
+HEADERS      += ${SRV_HEADERS:%=${SRCDIR}/%}
+SRV_OBJECTS   = ${SRV_SOURCES:%.cpp=%.o}
+OBJECTS      += ${SRV_OBJECTS}
+
 
 AUXFILES = Makefile README.md LICENSE
 MEDIAF   = small.mp4 small.jpg
 MEDIA    = ${MEDIAF:%=${MEDIADIR}/%}
 
-FILES    = ${PROGNAME} ${DOCDIR} ${SOURCES} ${HEADERS} ${AUXFILES} ${MEDIA}
+FILES    = ${PROG} ${DOCDIR} ${SOURCES} ${HEADERS} ${AUXFILES} ${MEDIA}
 
 CXX      = c++
 CXXFLAGS = -std=c++11 -Wall -Werror -g
 LDFLAGS  =
-LDLIBS   =
+LDLIBS   = -lpthread
 
 .PHONY: all run ${DOCDIR} ${MEDIADIR} ${RLSDIR} clean cleandist
 
-all: ${PROG}
+all: ${EXE}
 
-run: ${PROG}
+run: run-${PROG}
 	./$<
+
+run-%: %
+	./$*
 
 ${DOCDIR}: Doxyfile
 	doxygen $<
 
-${PROG}: depend-${PROG} ${OBJETS}
-	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
+${PROG}: depend-${PROG} ${MAIN_OBJECTS}
+	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${MAIN_OBJECTS} ${LDLIBS}
+
+${SRV}: depend-${SRV} ${SRV_OBJECTS}
+	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${SRV_OBJECTS} ${LDLIBS}
+
+${CLI}: depend-${CLI} ${CLI_OBJECTS}
+	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${CLI_OBJECTS} ${LDLIBS}
 
 clean:
-	-@$(RM) ${OBJETS} depend-${PROG} core 1>/dev/null 2>&1
+	-@$(RM) ${OBJECTS} ${EXE:%=depend-%} core 1>/dev/null 2>&1
 
 cleandist: clean
-	-@$(RM) ${PROG} 1>/dev/null 2>&1
+	-@$(RM) ${EXE} 1>/dev/null 2>&1
 	-@$(RM) -rf ${DOCDIR} ${MEDIADIR}
 
 ${MEDIADIR}: ${MEDIA}
@@ -64,7 +92,13 @@ ${RELEASE}: ${FILES}
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
 #
 depend-${PROG}:
-	@${CXX} ${CXXFLAGS} -MM ${SOURCES} > depend-${PROG}
+	@${CXX} ${CXXFLAGS} -MM ${MAIN_SOURCES} > depend-${PROG}
+
+depend-${CLI}:
+	@${CXX} ${CXXFLAGS} -MM ${MAIN_SOURCES} > depend-${CLI}
+
+depend-${SRV}:
+	@${CXX} ${CXXFLAGS} -MM ${MAIN_SOURCES} > depend-${SRV}
 
 
 ###########################################
