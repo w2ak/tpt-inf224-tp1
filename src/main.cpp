@@ -40,14 +40,15 @@ int main() {
   cerr << pic1.use_count() << endl;
   pic3 = 0;
   cerr << pic1.use_count() << endl;
-  Multimedia * picobj;
   try {
     pic1 = lib.getFile("something");
   } catch (exception& e) {
     cerr << e.what() << endl;
   }
-  picobj = new Picture("picture","media/small.jpg",0,0);
+/*
+  Multimedia * picobj = new Picture("picture","media/small.jpg",0,0);
   picobj->open();
   cerr << "Objects can still be created outside of libraries." << endl;
+*/
   return 0;
 }

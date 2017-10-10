@@ -15,10 +15,13 @@
  * \brief Class for picture files.
  */
 class Picture : public Multimedia {
+  friend class Library;
+
 private:
   double latitude;  /**< Latitude of the shoot location */
   double longitude; /**< Longitude of the shoot location */
-public:
+
+protected:
   /**
    * \brief Constructor
    *
@@ -45,6 +48,7 @@ public:
     longitude = lon;
   };
 
+public:
   ~Picture() {};
 
   /**

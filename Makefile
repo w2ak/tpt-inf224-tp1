@@ -24,7 +24,7 @@ MEDIA    = ${MEDIAF:%=${MEDIADIR}/%}
 FILES    = ${PROGNAME} ${DOCDIR} ${SOURCES} ${HEADERS} ${AUXFILES} ${MEDIA}
 
 CXX      = c++
-CXXFLAGS = -std=c++11 -Wall -g
+CXXFLAGS = -std=c++11 -Wall -Werror -g
 LDFLAGS  =
 LDLIBS   =
 

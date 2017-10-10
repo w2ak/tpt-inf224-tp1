@@ -22,7 +22,7 @@ protected:
   bool initialized = false; /**< true iff the path has been initialized */
   string name = string();   /**< human readable name */
   string path = string();   /**< path of the media file */
-public:
+
   /**
    * \brief Constructor
    *
@@ -44,6 +44,7 @@ public:
     initialized = true;
   };
 
+public:
   /**
    * \brief Destructor
    */

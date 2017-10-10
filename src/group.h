@@ -20,12 +20,16 @@ using namespace std;
  * \class Class for groups of Multimedia objects.
  */
 template <class X> class Group: public list<shared_ptr<X>> {
+  friend class Library;
+
 private:
   string name = string(); /**< Name of the group */
-public:
+
+protected:
   Group() : list<shared_ptr<X>>() {};
   Group(string n) : list<shared_ptr<X>>() { name=n; }
 
+public:
   ~Group() {};
 
   void setName(string n) { name=n; };

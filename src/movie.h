@@ -15,10 +15,13 @@
  * \brief Class for movie files.
  */
 class Movie : public Video {
+  friend class Library;
+
 private:
   int* chapters=nullptr; /**< Duration of chapters */
   int  chapn=0;          /**< Number of chapters */
-public:
+
+protected:
   /**
    * \brief Constructor
    *
@@ -51,6 +54,7 @@ public:
       this->setChapters(obj.chapters, obj.chapn);
   };
 
+public:
   ~Movie() { delete[] chapters; };
 
   /**

@@ -15,9 +15,12 @@
  * \brief Class for video files.
  */
 class Video : public Multimedia {
+  friend class Library;
+
 private:
   int duration; /**< Duration of the video */
-public:
+
+protected:
   /**
    * \brief Constructor
    *
@@ -39,6 +42,7 @@ public:
     duration = _duration;
   };
 
+public:
   virtual ~Video() {};
 
   /**

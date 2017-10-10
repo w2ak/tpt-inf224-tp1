@@ -22,6 +22,7 @@ class Library {
 private:
   map<string,shared_ptr<Multimedia>> files;
   map<string,shared_ptr<Group<Multimedia>>> groups;
+
 public:
   Library() {};
   ~Library() {};
