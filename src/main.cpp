@@ -27,5 +27,14 @@ using namespace std;
  */
 int main() {
   Library lib;
+  shared_ptr<Multimedia> pic;
+  Multimedia * picobj;
+  pic = lib.addPicture("picture","media/small.jpg",0,0);
+  cerr << lib.size() << " " << pic << endl;
+  pic = lib.addPicture("picture","media/small.jpg",0,0);
+  cerr << lib.size() << " " << pic << endl;
+  picobj = new Picture("picture","media/small.jpg",0,0);
+  picobj->open();
+  cerr << "Objects can still be created outside of libraries." << endl;
   return 0;
 }
