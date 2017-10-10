@@ -18,7 +18,6 @@
 #include "library.h"
 
 using namespace std;
-//typedef shared_ptr<Multimedia> mptr;
 
 /**
  * \fn int main (void)
@@ -27,12 +26,26 @@ using namespace std;
  */
 int main() {
   Library lib;
-  shared_ptr<Multimedia> pic;
+  shared_ptr<Multimedia> pic1,pic2,pic3;
+  stringstream ss;
+  pic1 = lib.addPicture("picture","media/small.jpg",0,0);
+  cerr << pic1.use_count() << endl;
+  pic2 = lib.getFile("picture");
+  cerr << pic1.use_count() << endl;
+  pic3 = lib.getFile("picture");
+  cerr << pic1.use_count() << endl;
+  pic1 = lib.getFile("picture");
+  cerr << pic1.use_count() << endl;
+  pic2 = 0;
+  cerr << pic1.use_count() << endl;
+  pic3 = 0;
+  cerr << pic1.use_count() << endl;
   Multimedia * picobj;
-  pic = lib.addPicture("picture","media/small.jpg",0,0);
-  cerr << lib.size() << " " << pic << endl;
-  pic = lib.addPicture("picture","media/small.jpg",0,0);
-  cerr << lib.size() << " " << pic << endl;
+  try {
+    pic1 = lib.getFile("something");
+  } catch (exception& e) {
+    cerr << e.what() << endl;
+  }
   picobj = new Picture("picture","media/small.jpg",0,0);
   picobj->open();
   cerr << "Objects can still be created outside of libraries." << endl;
