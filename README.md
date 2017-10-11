@@ -100,3 +100,7 @@ Added a few corrections. By using `const` it is possible to tell the compiler wh
 ## Step 9
 
 Shared pointers allow memory to be managed correctly. `Group` is now a list of shared pointers. This way, even though groups can share `Multimedia` objects, these objects are only deleted when they are not used anymore.
+
+## Step 11
+
+`MyBase` has a basic default library created in the constructor.

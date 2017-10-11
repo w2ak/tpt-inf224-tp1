@@ -27,8 +27,8 @@ HEADERS      += ${CLI_HEADERS:%=${SRCDIR}/%}
 CLI_OBJECTS   = ${CLI_SOURCES:%.cpp=%.o}
 OBJECTS      += ${CLI_OBJECTS}
 
-SRV_SOURCES   = server.cpp tcpserver.cpp cppsocket.cpp
-SRV_HEADERS   =            tcpserver.h   cppsocket.h
+SRV_SOURCES   = server.cpp tcpserver.cpp cppsocket.cpp multimedia.cpp video.cpp movie.cpp picture.cpp
+SRV_HEADERS   =            tcpserver.h   cppsocket.h   multimedia.h   video.h   movie.h   picture.h   group.h   library.h
 SRV_SOURCES  := ${SRV_SOURCES:%=${SRCDIR}/%}
 SOURCES      += ${SRV_SOURCES}
 HEADERS      += ${SRV_HEADERS:%=${SRCDIR}/%}

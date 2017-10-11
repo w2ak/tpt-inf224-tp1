@@ -8,14 +8,26 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "tcpserver.h"
+#include "library.h"
 using namespace std;
 using namespace cppu;
 
 const int PORT = 3331;
 
 class MyBase {
+private:
+  int id;
+  Library lib;
 public:
+  MyBase(int i) {
+    id = i;
+    const shared_ptr<Multimedia> pic = lib.addPicture("picture","media/small.jpg",0,0);
+    lib.addVideo("video","media/small.mp4",0);
+    lib.addGroup("group")->push_back(pic);
+  };
+  MyBase():MyBase(42) {};
   /* Cette méthode est appelée chaque fois qu'il y a une requête à traiter.
    * Ca doit etre une methode de la classe qui gere les données, afin qu'elle
    * puisse y accéder.
@@ -65,23 +77,22 @@ int main(int argc, char* argv[])
 {
   // cree le TCPServer
   shared_ptr<TCPServer> server(new TCPServer());
-  
-  // cree l'objet qui gère les données
-  shared_ptr<MyBase> base(new MyBase());
 
-  // le serveur appelera cette méthode chaque fois qu'il y a une requête
+  // cree l'objet qui gère les données
+  shared_ptr<MyBase> base(new MyBase(PORT));
+
+  // le serveur appelera cette méthode chaque fois qu'il y a une requête
   server->setCallback(*base, &MyBase::processRequest);
-  
+
   // lance la boucle infinie du serveur
   cout << "Starting Server on port " << PORT << endl;
   int status = server->run(PORT);
-  
-  // en cas d'erreur
+
+  // en cas d'erreur
   if (status < 0) {
     cerr << "Could not start Server on port " << PORT << endl;
     return 1;
   }
-  
+
   return 0;
 }
-

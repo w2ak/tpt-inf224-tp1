@@ -9,7 +9,8 @@
  * \date 2017-09-19
  */
 #include <map>
-#include "multimedia.h"
+#include "movie.h"
+#include "picture.h"
 #include "group.h"
 
 using namespace std;
