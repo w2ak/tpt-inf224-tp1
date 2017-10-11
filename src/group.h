@@ -42,7 +42,7 @@ public:
    */
   void print(ostream& s) const {
     s << "Group(" << name << ")" << endl;
-    class list<shared_ptr<X>>::const_iterator b = this->cbegin(), e = this->cend();
+    typename list<shared_ptr<X>>::const_iterator b = this->cbegin(), e = this->cend();
     for (; b!=e; ++b) {
       (*b)->print(s); s << " (used by " << (*b).use_count() << ")" << endl;
     }

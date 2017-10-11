@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/w2ak/tpt-inf224-tp1.svg?branch=master)](https://travis-ci.org/w2ak/tpt-inf224-tp1)
+
 # tpt-inf224-tp1
 
 ![Télécom ParisTech][tpt]

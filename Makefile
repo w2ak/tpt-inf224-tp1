@@ -52,7 +52,6 @@ LDLIBS   = -lpthread
 all: ${EXE}
 
 run: run-${PROG}
-	./$<
 
 run-%: %
 	./$*
