@@ -103,4 +103,4 @@ Shared pointers allow memory to be managed correctly. `Group` is now a list of s
 
 ## Step 11
 
-`MyBase` has a basic default library created in the constructor.
+`MyBase` has a basic default library created in the constructor. `TCPLock` locks are used to prevent aberrations due to concurrency. In this case there are only read-mode lock because the implemented commands are read-only commands.

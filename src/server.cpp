@@ -71,6 +71,7 @@ public:
     // - si le traitement modifie les donnees inclure: TCPLock lock(cnx, true);
     // - sinon juste: TCPLock lock(cnx);
     if (cmd == "fileInfo") {
+      TCPLock lock(cnx);
       if (lib.hasFile(name)) {
         lib.fileInfo(name,resp);
       } else {
@@ -79,6 +80,7 @@ public:
       goto done;
     }
     if (cmd == "groupInfo") {
+      TCPLock lock(cnx);
       if (lib.hasGroup(name)) {
         lib.groupInfo(name,resp);
       } else {
@@ -87,6 +89,7 @@ public:
       goto done;
     }
     if (cmd == "play") {
+      TCPLock lock(cnx);
       if (lib.hasFile(name)) {
         resp << "Now playing: ";
         lib.fileInfo(name,resp);
