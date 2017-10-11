@@ -117,6 +117,8 @@ done:
 
     response+=resp.str();
 
+    replace(response.begin(),response.end(),'\n',';');
+
     cerr << "response: " << response << endl;
 
     // renvoyer false si on veut clore la connexion avec le client
