@@ -100,3 +100,7 @@ Added a few corrections. By using `const` it is possible to tell the compiler wh
 ## Step 9
 
 Shared pointers allow memory to be managed correctly. `Group` is now a list of shared pointers. This way, even though groups can share `Multimedia` objects, these objects are only deleted when they are not used anymore.
+
+## Step 10
+
+The `Library` objects directly manage their multimedia objects. In order to keep the user from creating multimedia objects by himself, their constructors were made protected and accessible only by the friend class `Library`.
