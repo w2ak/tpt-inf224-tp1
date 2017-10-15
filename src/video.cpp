@@ -2,7 +2,7 @@
 #include "video.h"
 
 void Video::print(ostream& s) const {
-  s << "Video(" << name << ") @ " << path;
+  Multimedia::print(s);
   s << " : " << duration << "s";
 }
 

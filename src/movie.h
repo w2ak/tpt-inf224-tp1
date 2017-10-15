@@ -79,6 +79,8 @@ public:
    */
   int getChapter(int i) { return ((0<i) && (i<=chapn)) ? chapters[i-1] : -1; };
 
+  void className(ostream& s) const override { s << "Movie"; }
+
   void print(ostream& s) const override;
 };
 

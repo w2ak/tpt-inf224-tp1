@@ -59,6 +59,8 @@ public:
    */
   int getDuration() const { return duration; };
 
+  void className(ostream& s) const override { s << "Video"; }
+
   void print(ostream& s) const override;
   void open() const override;
 };

@@ -75,6 +75,8 @@ public:
     *lon = longitude;
   };
 
+  void className(ostream& s) const override { s << "Picture"; }
+
   void print(ostream& s) const override;
   void open() const override;
 };

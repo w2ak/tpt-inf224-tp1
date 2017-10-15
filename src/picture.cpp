@@ -2,7 +2,7 @@
 #include "picture.h"
 
 void Picture::print(ostream& s) const {
-  s << "Picture(" << name << ") @ " << path;
+  Multimedia::print(s);
   s << " : " << latitude << "," << longitude;
 }
 

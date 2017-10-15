@@ -9,8 +9,7 @@ void Movie::setChapters(const int* c, unsigned int n) {
 }
 
 void Movie::print(ostream& s) const {
-  s << "Movie(" << name << ") @ " << path;
-  s << " : " << this->getDuration() << "s";
+  Video::print(s);
   s << " : [";
   for (int i=0; i<chapn; i++) {
     if (i) s << ",";

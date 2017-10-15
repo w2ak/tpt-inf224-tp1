@@ -86,11 +86,21 @@ public:
   int check() const;
 
   /**
+   * \fn virtual void className (ostream& s) const
+   * \brief Prints the class name in s.
+   * \param s: an output stream.
+   */
+  virtual void className(ostream& s) const = 0;
+
+  /**
    * \fn virtual void print (ostream& s) const
    * \brief Prints the object description in s.
    * \param s: an output stream.
    */
-  virtual void print(ostream& s) const = 0;
+  virtual void print(ostream& s) const {
+    this->className(s);
+    s << "(" << name << ") @ " << path;
+  };
 
   /**
    * \fn virtual void open (void) const
