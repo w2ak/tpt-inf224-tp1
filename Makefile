@@ -11,8 +11,8 @@ MEDIADIR = media
 TAG     ?= v0
 RELEASE  = ${RLSDIR}/${PROG}${TAG}.tar.gz
 
-MAIN_SOURCES  = main.cpp multimedia.cpp video.cpp movie.cpp picture.cpp
-MAIN_HEADERS  =          multimedia.h   video.h   movie.h   picture.h   group.h   library.h
+MAIN_SOURCES  = main.cpp tcpserver.cpp cppsocket.cpp multimedia.cpp video.cpp movie.cpp picture.cpp           library.cpp
+MAIN_HEADERS  =          tcpserver.h   cppsocket.h   multimedia.h   video.h   movie.h   picture.h   group.h   library.h
 MAIN_SOURCES := ${MAIN_SOURCES:%=${SRCDIR}/%}
 SOURCES      += ${MAIN_SOURCES}
 HEADERS      += ${MAIN_HEADERS:%=${SRCDIR}/%}
@@ -27,7 +27,7 @@ HEADERS      += ${CLI_HEADERS:%=${SRCDIR}/%}
 CLI_OBJECTS   = ${CLI_SOURCES:%.cpp=%.o}
 OBJECTS      += ${CLI_OBJECTS}
 
-SRV_SOURCES   = server.cpp tcpserver.cpp cppsocket.cpp multimedia.cpp video.cpp movie.cpp picture.cpp
+SRV_SOURCES   = server.cpp tcpserver.cpp cppsocket.cpp multimedia.cpp video.cpp movie.cpp picture.cpp           library.cpp
 SRV_HEADERS   =            tcpserver.h   cppsocket.h   multimedia.h   video.h   movie.h   picture.h   group.h   library.h
 SRV_SOURCES  := ${SRV_SOURCES:%=${SRCDIR}/%}
 SOURCES      += ${SRV_SOURCES}

@@ -9,11 +9,13 @@
  * \date 2017-09-19
  */
 #include <map>
+#include "tcpserver.h"
 #include "movie.h"
 #include "picture.h"
 #include "group.h"
 
 using namespace std;
+using namespace cppu;
 
 /**
  * \class Library library.h
@@ -145,5 +147,8 @@ public:
       groups[_name] = shared_ptr<Group<Multimedia>>(new Group<Multimedia>(_name));
     return groups.at(_name);
   };
+
+  bool processRequest(TCPConnection& cnx, const string& request, string& response);
+
 };
 #endif
