@@ -21,6 +21,7 @@ private:
   int duration; /**< Duration of the video */
 
 protected:
+public:
   /**
    * \brief Constructor
    *
@@ -63,6 +64,9 @@ public:
 
   void print(ostream& s) const override;
   void open() const override;
+
+  void parse(istream& s) override;
+  void unparse(ostream& s) const override;
 };
 
 #endif

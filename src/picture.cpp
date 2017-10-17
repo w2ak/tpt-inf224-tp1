@@ -16,11 +16,10 @@ void Picture::parse(istream& s) {
   Multimedia::parse(s);
   char sep = ';';
   string str;
-  string::size_type sz;
   getline(s,str,sep);
-  latitude = stod(str,&sz);
+  latitude = stod(str);
   getline(s,str,sep);
-  longitude = stod(str,&sz);
+  longitude = stod(str);
 };
 
 void Picture::unparse(ostream& s) const {

@@ -11,3 +11,17 @@ void Video::open() const {
     return;
   system(("mpv " + path + ">/dev/null 2>/dev/null &").c_str());
 }
+
+void Video::parse(istream& s) {
+  Multimedia::parse(s);
+  char sep = ';';
+  string str;
+  getline(s,str,sep);
+  duration = stoi(str);
+};
+
+void Video::unparse(ostream& s) const {
+  Multimedia::unparse(s);
+  char sep = ';';
+  s << duration << sep;
+}

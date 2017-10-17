@@ -26,17 +26,17 @@ using namespace std;
  * \return 0
  */
 int main() {
-  Picture pic1("a;beautiful;name","media/small.jpg",3.14,1.41);
-  pic1.print(cerr);
+  Video vid1("a;beautiful;name","media/small.jpg",1.4142135);
+  vid1.print(cerr);
   cerr << endl;
   stringstream s;
   string str;
-  pic1.unparse(s);
+  vid1.unparse(s);
   cerr << s.str() << endl;
   getline(s,str,';');
-  Picture pic2;
-  pic2.parse(s);
-  pic2.print(cerr);
+  Video vid2;
+  vid2.parse(s);
+  vid2.print(cerr);
   cerr << endl;
   return 0;
 }

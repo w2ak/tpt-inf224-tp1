@@ -22,7 +22,6 @@ private:
   double longitude; /**< Longitude of the shoot location */
 
 protected:
-public:
   /**
    * \brief Constructor
    *
