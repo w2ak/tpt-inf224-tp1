@@ -26,7 +26,7 @@ protected:
    *
    * Creates an uninitialized video object.
    */
-  Video():Multimedia() { duration = -1; };
+  Video():Multimedia() { duration = -1; }
 
   /**
    * \brief Constructor
@@ -40,24 +40,24 @@ protected:
   Video(string _name, string _path, int _duration):
   Multimedia(_name,_path) {
     duration = _duration;
-  };
+  }
 
 public:
-  virtual ~Video() {};
+  virtual ~Video() {}
 
   /**
    * \fn void setDuration (int _duration)
    * \brief Changes the video duration.
    * \param _duration: new duration.
    */
-  void setDuration(int _duration) { duration = _duration; };
+  void setDuration(int _duration) { duration = _duration; }
 
   /**
    * \fn int getDuration (void) const
    * \brief Returns the video duration.
    * \return The video duration contained in the object.
    */
-  int getDuration() const { return duration; };
+  int getDuration() const { return duration; }
 
   void className(ostream& s) const override { s << "Video"; }
 

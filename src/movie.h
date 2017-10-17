@@ -27,7 +27,7 @@ protected:
    *
    * Creates an uninitialized video object.
    */
-  Movie():Video() {};
+  Movie():Video() {}
 
   /**
    * \brief Constructor
@@ -39,7 +39,7 @@ protected:
    * \param _duration: movie duration
    */
   Movie(string _name, string _path, int _duration):
-  Video(_name,_path,_duration) {};
+  Video(_name,_path,_duration) {}
 
   /**
    * \brief Copy Constructor
@@ -52,10 +52,10 @@ protected:
     chapn = 0;
     if (obj.chapters != nullptr)
       this->setChapters(obj.chapters, obj.chapn);
-  };
+  }
 
 public:
-  ~Movie() { delete[] chapters; };
+  ~Movie() { delete[] chapters; }
 
   /**
    * \fn void setChapters (int _duration)
@@ -70,14 +70,14 @@ public:
    * \brief Gives the number of chapters.
    * \return The number of chapters chapn.
    */
-  int getChapterCount() { return chapn; };
+  int getChapterCount() { return chapn; }
 
   /**
    * \fn int getChapter (int i)
    * \brief Gives length of chapter i.
    * \return The length of chapter i chapters[i-1].
    */
-  int getChapter(int i) { return ((0<i) && (i<=chapn)) ? chapters[i-1] : -1; };
+  int getChapter(int i) { return ((0<i) && (i<=chapn)) ? chapters[i-1] : -1; }
 
   void className(ostream& s) const override { s << "Movie"; }
 

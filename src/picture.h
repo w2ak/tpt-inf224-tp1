@@ -30,7 +30,7 @@ protected:
   Picture():Multimedia() {
     latitude = 0;
     longitude = 0;
-  };
+  }
 
   /**
    * \brief Constructor
@@ -46,10 +46,10 @@ protected:
   Multimedia(_name,_path) {
     latitude = lat;
     longitude = lon;
-  };
+  }
 
 public:
-  ~Picture() {};
+  ~Picture() {}
 
   /**
    * \fn void setPosition (double lat, double lon)
@@ -60,7 +60,7 @@ public:
   void setPosition(double lat, double lon) {
     latitude = lat;
     longitude = lon;
-  };
+  }
 
   /**
    * \fn void getPosition (double * lat, double * lon)
@@ -73,7 +73,7 @@ public:
   void getPosition(double * lat, double * lon) {
     *lat = latitude;
     *lon = longitude;
-  };
+  }
 
   void className(ostream& s) const override { s << "Picture"; }
 

@@ -27,8 +27,8 @@ private:
   map<string,shared_ptr<Group<Multimedia>>> groups;
 
 public:
-  Library() {};
-  ~Library() {};
+  Library() {}
+  ~Library() {}
 
   /**
    * \fn int size
@@ -43,7 +43,7 @@ public:
    * \brief Returns 1 if multimedia name is in the files.
    * \param _name: name of the multimedia file
    */
-  int hasFile(string _name) const { return files.count(_name); };
+  int hasFile(string _name) const { return files.count(_name); }
 
   /**
    * \fn shared_ptr<Multimedia> getFile
@@ -54,7 +54,7 @@ public:
   shared_ptr<Multimedia> getFile(string _name) const {
     if (hasFile(_name)) return files.at(_name);
     throw invalid_argument("File not found.");
-  };
+  }
 
   /**
    * \fn void fileInfo
@@ -63,14 +63,14 @@ public:
    * \param _name: name of the multimedia file
    * \param ss: output stream to print to
    */
-  void fileInfo(string _name, ostream& ss) const { getFile(_name)->print(ss); };
+  void fileInfo(string _name, ostream& ss) const { getFile(_name)->print(ss); }
 
   /**
    * \fn void open
    *
    * \brief Opens a multimedia file.
    */
-  void open(string _name) const { getFile(_name)->open(); };
+  void open(string _name) const { getFile(_name)->open(); }
 
   /**
    * \fn int hasGroup
@@ -78,7 +78,7 @@ public:
    * \brief Returns 1 if group name is in the groups.
    * \param _name: name of the group
    */
-  int hasGroup(string _name) const { return groups.count(_name); };
+  int hasGroup(string _name) const { return groups.count(_name); }
 
   /**
    * \fn shared_ptr<Group<Multimedia>> getGroup
@@ -89,7 +89,7 @@ public:
   shared_ptr<Group<Multimedia>> getGroup(string _name) const {
     if (hasGroup(_name)) return groups.at(_name);
     throw invalid_argument("Group not found.");
-  };
+  }
 
   /**
    * \fn void groupInfo
@@ -98,7 +98,7 @@ public:
    * \param _name: name of the group
    * \param ss: output stream to print to
    */
-  void groupInfo(string _name, ostream& ss) const { getGroup(_name)->print(ss); };
+  void groupInfo(string _name, ostream& ss) const { getGroup(_name)->print(ss); }
 
   /**
    * \fn shared_ptr<Multimedia> addPicture
@@ -110,7 +110,7 @@ public:
     if (!hasFile(_name))
       files[_name] = shared_ptr<Multimedia>(new Picture(_name,_path,lat,lon));
     return files.at(_name);
-  };
+  }
 
   /**
    * \fn shared_ptr<Multimedia> addVideo
@@ -122,7 +122,7 @@ public:
     if (!hasFile(_name))
       files[_name] = shared_ptr<Multimedia>(new Video(_name, _path, _duration));
     return files.at(_name);
-  };
+  }
 
   /**
    * \fn shared_ptr<Multimedia> addMovie
@@ -134,7 +134,7 @@ public:
     if (!hasFile(_name))
       files[_name] = shared_ptr<Multimedia>(new Movie(_name, _path, _duration));
     return files.at(_name);
-  };
+  }
 
   /**
    * \fn shared_ptr<Group<Multimedia>> addGroup
@@ -146,7 +146,7 @@ public:
     if (!hasGroup(_name))
       groups[_name] = shared_ptr<Group<Multimedia>>(new Group<Multimedia>(_name));
     return groups.at(_name);
-  };
+  }
 
   bool processRequest(TCPConnection& cnx, const string& request, string& response);
 

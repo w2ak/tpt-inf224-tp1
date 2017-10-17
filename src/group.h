@@ -26,14 +26,14 @@ private:
   string name = string(); /**< Name of the group */
 
 protected:
-  Group() : list<shared_ptr<X>>() {};
+  Group() : list<shared_ptr<X>>() {}
   Group(string n) : list<shared_ptr<X>>() { name=n; }
 
 public:
-  ~Group() {};
+  ~Group() {}
 
-  void setName(string n) { name=n; };
-  string getName() const { return name; };
+  void setName(string n) { name=n; }
+  string getName() const { return name; }
 
   /**
    * \fn void print (ostream& s) const
@@ -46,7 +46,7 @@ public:
     for (; b!=e; ++b) {
       (*b)->print(s); s << " (used by " << (*b).use_count() << ")" << endl;
     }
-  };
+  }
 };
 
 #endif

@@ -18,7 +18,7 @@ void Video::parse(istream& s) {
   string str;
   getline(s,str,sep);
   duration = stoi(str);
-};
+}
 
 void Video::unparse(ostream& s) const {
   Multimedia::unparse(s);

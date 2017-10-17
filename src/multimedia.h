@@ -30,7 +30,7 @@ protected:
    *
    * Creates an uninitialized media object.
    */
-  Multimedia() {};
+  Multimedia() {}
 
   /**
    * \brief Constructor
@@ -44,41 +44,41 @@ protected:
     name = _name;
     path = _path;
     initialized = true;
-  };
+  }
 
 public:
   /**
    * \brief Destructor
    */
-  virtual ~Multimedia() {};
+  virtual ~Multimedia() {}
 
   /**
    * \fn void setPath (string p)
    * \brief Changes the media file path.
    * \param p: New path.
    */
-  void setPath(string p) { path=p; initialized=true; };
+  void setPath(string p) { path=p; initialized=true; }
 
   /**
    * \fn string getPath (void) const
    * \brief Returns the media file path.
    * \return The media file path of the object.
    */
-  string getPath() const { return path; };
+  string getPath() const { return path; }
 
   /**
    * \fn void setName (string n)
    * \brief Changes the display name.
    * \param n: New name.
    */
-  void setName(string n) { name=n; };
+  void setName(string n) { name=n; }
 
   /**
    * \fn string getName (void) const
    * \brief Returns the display name.
    * \return The display name of the object.
    */
-  string getName() const { return name; };
+  string getName() const { return name; }
 
   /**
    * \fn int check (void) const
@@ -102,7 +102,7 @@ public:
   virtual void print(ostream& s) const {
     this->className(s);
     s << "(" << name << ") @ " << path;
-  };
+  }
 
   /**
    * \fn virtual void open (void) const
@@ -120,7 +120,7 @@ public:
     char sep = ';';
     getline(s,name,sep);
     getline(s,path,sep);
-  };
+  }
 
   /**
    * \fn virtual void unparse (ostream& s)
@@ -136,7 +136,7 @@ public:
     replace(p.begin(),p.end(),sep,' ');
     className(s);
     s << sep << n << sep << p << sep;
-  };
+  }
 };
 
 #endif
