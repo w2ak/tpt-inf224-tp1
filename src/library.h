@@ -151,6 +151,8 @@ public:
   bool processRequest(TCPConnection& cnx, const string& request, string& response);
 
   void unparse(ostream& s) const;
+  void save(const string& filename) const;
   void parse(istream& s);
+  void load(const string& filename);
 };
 #endif

@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <algorithm>
 #include "tcpserver.h"
 #include "library.h"
@@ -103,6 +104,13 @@ void Library::unparse(ostream& s) const {
   }
 }
 
+void Library::save(const string& filename) const {
+  ofstream file;
+  file.open(filename);
+  if (file) unparse(file);
+  file.close();
+}
+
 void Library::parse(istream& s) {
   string lin,key,cls;
   stringstream buf;
@@ -114,13 +122,11 @@ void Library::parse(istream& s) {
     getline(buf,cls,sep);
     if (cls == "Group") {
       if (!hasGroup(key)) {
-        cerr << "Creating group " << key << endl;
         shared_ptr<Group<Multimedia>> obj(new Group<Multimedia>(key));
         obj->parse(buf,[this](const string& k) { return this->getFile(k); });
         groups[key] = obj;
       }
     } else if (!hasFile(key)) {
-      cerr << "Creating file " << key << endl;
       shared_ptr<Multimedia> obj;
       if (cls == "Picture") obj = shared_ptr<Multimedia>(new Picture(key));
       if (cls == "Video") obj = shared_ptr<Multimedia>(new Video(key));
@@ -132,4 +138,11 @@ void Library::parse(istream& s) {
     }
     getline(s,lin);
   }
+}
+
+void Library::load(const string& filename) {
+  ifstream file;
+  file.open(filename);
+  if (file) parse(file);
+  file.close();
 }

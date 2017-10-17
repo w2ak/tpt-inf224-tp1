@@ -26,7 +26,6 @@ using namespace std;
  * \return 0
  */
 int main() {
-  stringstream ss;
   Library lib1;
   Library lib2;
   unsigned int chapn = 7;
@@ -38,12 +37,10 @@ int main() {
   const shared_ptr<Group<Multimedia>> grp = lib1.addGroup("group");
   grp->push_back(movie);
   grp->push_back(lib1.getFile("picture"));
-  lib1.unparse(ss);
-  lib1.unparse(ss);
-  cerr << ss.str();
+  lib1.unparse(cerr);
+  lib1.save("/tmp/lib1.txt");
   cerr << "=====" << endl;
-  lib2.parse(ss);
-  cerr << "=====" << endl;
+  lib2.load("/tmp/lib1.txt");
   lib2.unparse(cerr);
   return 0;
 }
