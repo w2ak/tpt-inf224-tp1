@@ -88,3 +88,38 @@ done:
   // renvoyer false si on veut clore la connexion avec le client
   return true;
 }
+
+void Library::unparse(ostream& s) const {
+  char sep = ';';
+  for (auto it: files) {
+    s << it.first << sep;
+    it.second->unparse(s);
+    s << endl;
+  }
+}
+
+void Library::parse(istream& s) {
+  string lin,key,cls;
+  stringstream buf;
+  char sep = ';';
+  getline(s,lin);
+  while (!lin.empty()) {
+    buf.str(lin);
+    getline(buf,key,sep);
+    getline(buf,cls,sep);
+    if ((cls == "Group") && (!hasGroup(key))) {
+      cerr << "Creating group " << key << endl;
+    } else if (!hasFile(key)) {
+      cerr << "Creating file " << key << endl;
+      shared_ptr<Multimedia> obj;
+      if (cls == "Picture") obj = shared_ptr<Multimedia>(new Picture());
+      if (cls == "Video") obj = shared_ptr<Multimedia>(new Video());
+      if (cls == "Movie") obj = shared_ptr<Multimedia>(new Movie());
+      if (obj) {
+        obj->parse(buf);
+        files[key] = obj;
+      }
+    }
+    getline(s,lin);
+  }
+}

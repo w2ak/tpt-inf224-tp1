@@ -26,19 +26,21 @@ using namespace std;
  * \return 0
  */
 int main() {
-  Movie mov1("a;beautiful;name","media/small.jpg",1.4142135);
-  const int chapters[7] = {1,1,2,3,5,8,13};
-  mov1.setChapters(chapters,7);
-  mov1.print(cerr);
-  cerr << endl;
-  stringstream s;
-  string str;
-  mov1.unparse(s);
-  cerr << s.str() << endl;
-  getline(s,str,';');
-  Movie mov2;
-  mov2.parse(s);
-  mov2.print(cerr);
-  cerr << endl;
+  stringstream ss;
+  Library lib1;
+  Library lib2;
+  unsigned int chapn = 7;
+  int chapters[7] = {1,1,2,3,5,8,13};
+  lib1.addPicture("picture","media/small.jpg",3.14,1.41);
+  lib1.addVideo("video","media/small.mp4",42);
+  const shared_ptr<Movie> movie = dynamic_pointer_cast<Movie>(lib1.addMovie("movie","media/small.mp4",42));
+  if (movie) movie->setChapters(chapters,chapn);
+  lib1.unparse(ss);
+  lib1.unparse(ss);
+  cerr << ss.str();
+  cerr << "=====" << endl;
+  lib2.parse(ss);
+  cerr << "=====" << endl;
+  lib2.unparse(cerr);
   return 0;
 }

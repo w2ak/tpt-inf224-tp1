@@ -22,7 +22,6 @@ private:
   int  chapn=0;          /**< Number of chapters */
 
 protected:
-public:
   /**
    * \brief Constructor
    *
