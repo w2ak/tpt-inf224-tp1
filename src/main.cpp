@@ -26,17 +26,19 @@ using namespace std;
  * \return 0
  */
 int main() {
-  Video vid1("a;beautiful;name","media/small.jpg",1.4142135);
-  vid1.print(cerr);
+  Movie mov1("a;beautiful;name","media/small.jpg",1.4142135);
+  const int chapters[7] = {1,1,2,3,5,8,13};
+  mov1.setChapters(chapters,7);
+  mov1.print(cerr);
   cerr << endl;
   stringstream s;
   string str;
-  vid1.unparse(s);
+  mov1.unparse(s);
   cerr << s.str() << endl;
   getline(s,str,';');
-  Video vid2;
-  vid2.parse(s);
-  vid2.print(cerr);
+  Movie mov2;
+  mov2.parse(s);
+  mov2.print(cerr);
   cerr << endl;
   return 0;
 }

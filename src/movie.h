@@ -22,6 +22,7 @@ private:
   int  chapn=0;          /**< Number of chapters */
 
 protected:
+public:
   /**
    * \brief Constructor
    *
@@ -82,6 +83,9 @@ public:
   void className(ostream& s) const override { s << "Movie"; }
 
   void print(ostream& s) const override;
+
+  void parse(istream& s) override;
+  void unparse(ostream& s) const override;
 };
 
 #endif

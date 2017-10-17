@@ -21,7 +21,6 @@ private:
   int duration; /**< Duration of the video */
 
 protected:
-public:
   /**
    * \brief Constructor
    *
