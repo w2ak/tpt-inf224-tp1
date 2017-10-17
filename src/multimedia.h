@@ -10,6 +10,8 @@
  */
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -107,6 +109,34 @@ public:
    * \brief Tries to open the media file.
    */
   virtual void open() const = 0;
+
+  /**
+   * \fn virtual void parse (istream& s)
+   * \brief Parses string into object
+   *
+   * \param s: an input stream.
+   */
+  virtual void parse(istream& s) {
+    char sep = ';';
+    getline(s,name,sep);
+    getline(s,path,sep);
+  };
+
+  /**
+   * \fn virtual void unparse (ostream& s)
+   * \brief Serializes object into string
+   *
+   * \param s: an output stream.
+   */
+  virtual void unparse(ostream& s) const {
+    char sep = ';';
+    string n = name;
+    replace(n.begin(),n.end(),sep,' ');
+    string p = path;
+    replace(p.begin(),p.end(),sep,' ');
+    className(s);
+    s << sep << n << sep << p << sep;
+  };
 };
 
 #endif

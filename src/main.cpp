@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include <assert.h>
 #include "picture.h"
 #include "video.h"
@@ -25,30 +26,17 @@ using namespace std;
  * \return 0
  */
 int main() {
-  Library lib;
-  shared_ptr<Multimedia> pic1,pic2,pic3;
-  stringstream ss;
-  pic1 = lib.addPicture("picture","media/small.jpg",0,0);
-  cerr << pic1.use_count() << endl;
-  pic2 = lib.getFile("picture");
-  cerr << pic1.use_count() << endl;
-  pic3 = lib.getFile("picture");
-  cerr << pic1.use_count() << endl;
-  pic1 = lib.getFile("picture");
-  cerr << pic1.use_count() << endl;
-  pic2 = 0;
-  cerr << pic1.use_count() << endl;
-  pic3 = 0;
-  cerr << pic1.use_count() << endl;
-  try {
-    pic1 = lib.getFile("something");
-  } catch (exception& e) {
-    cerr << e.what() << endl;
-  }
-/*
-  Multimedia * picobj = new Picture("picture","media/small.jpg",0,0);
-  picobj->open();
-  cerr << "Objects can still be created outside of libraries." << endl;
-*/
+  Picture pic1("a;beautiful;name","media/small.jpg",3.14,1.41);
+  pic1.print(cerr);
+  cerr << endl;
+  stringstream s;
+  string str;
+  pic1.unparse(s);
+  cerr << s.str() << endl;
+  getline(s,str,';');
+  Picture pic2;
+  pic2.parse(s);
+  pic2.print(cerr);
+  cerr << endl;
   return 0;
 }

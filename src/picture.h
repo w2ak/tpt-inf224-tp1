@@ -22,6 +22,7 @@ private:
   double longitude; /**< Longitude of the shoot location */
 
 protected:
+public:
   /**
    * \brief Constructor
    *
@@ -79,6 +80,9 @@ public:
 
   void print(ostream& s) const override;
   void open() const override;
+
+  void parse(istream& s) override;
+  void unparse(ostream& s) const override;
 };
 
 #endif
