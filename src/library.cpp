@@ -96,6 +96,11 @@ void Library::unparse(ostream& s) const {
     it.second->unparse(s);
     s << endl;
   }
+  for (auto it: groups) {
+    s << it.first << sep;
+    it.second->unparse(s);
+    s << endl;
+  }
 }
 
 void Library::parse(istream& s) {
@@ -107,14 +112,19 @@ void Library::parse(istream& s) {
     buf.str(lin);
     getline(buf,key,sep);
     getline(buf,cls,sep);
-    if ((cls == "Group") && (!hasGroup(key))) {
-      cerr << "Creating group " << key << endl;
+    if (cls == "Group") {
+      if (!hasGroup(key)) {
+        cerr << "Creating group " << key << endl;
+        shared_ptr<Group<Multimedia>> obj(new Group<Multimedia>(key));
+        obj->parse(buf,[this](const string& k) { return this->getFile(k); });
+        groups[key] = obj;
+      }
     } else if (!hasFile(key)) {
       cerr << "Creating file " << key << endl;
       shared_ptr<Multimedia> obj;
-      if (cls == "Picture") obj = shared_ptr<Multimedia>(new Picture());
-      if (cls == "Video") obj = shared_ptr<Multimedia>(new Video());
-      if (cls == "Movie") obj = shared_ptr<Multimedia>(new Movie());
+      if (cls == "Picture") obj = shared_ptr<Multimedia>(new Picture(key));
+      if (cls == "Video") obj = shared_ptr<Multimedia>(new Video(key));
+      if (cls == "Movie") obj = shared_ptr<Multimedia>(new Movie(key));
       if (obj) {
         obj->parse(buf);
         files[key] = obj;

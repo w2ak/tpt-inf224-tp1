@@ -26,7 +26,7 @@ protected:
    *
    * Creates an uninitialized video object.
    */
-  Video():Multimedia() { duration = -1; }
+  Video(const string& id):Multimedia(id) { duration = -1; }
 
   /**
    * \brief Constructor

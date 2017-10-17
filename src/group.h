@@ -35,16 +35,39 @@ public:
   void setName(string n) { name=n; }
   string getName() const { return name; }
 
+  void className(ostream& s) const { s << "Group"; }
+
   /**
    * \fn void print (ostream& s) const
    * \brief Prints the group elements to s.
    * \param s: an output stream.
    */
   void print(ostream& s) const {
-    s << "Group(" << name << ")" << endl;
+    className(s);
+    s << "(" << name << ")" << endl;
     typename list<shared_ptr<X>>::const_iterator b = this->cbegin(), e = this->cend();
     for (; b!=e; ++b) {
       (*b)->print(s); s << " (used by " << (*b).use_count() << ")" << endl;
+    }
+  }
+
+  void unparse(ostream& s) const {
+    char sep=';';
+    className(s);
+    s << sep;
+    typename list<shared_ptr<X>>::const_iterator b = this->cbegin(), e = this->cend();
+    for (; b!=e; ++b) {
+      s << (*b)->getID() << sep;
+    }
+  }
+
+  void parse(istream& s, function<shared_ptr<X>(const string&)> getFile) {
+    char sep=';';
+    string key;
+    getline(s,key,sep);
+    while (!key.empty()) {
+      this->push_back(getFile(key));
+      getline(s,key,sep);
     }
   }
 };

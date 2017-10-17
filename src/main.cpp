@@ -35,6 +35,9 @@ int main() {
   lib1.addVideo("video","media/small.mp4",42);
   const shared_ptr<Movie> movie = dynamic_pointer_cast<Movie>(lib1.addMovie("movie","media/small.mp4",42));
   if (movie) movie->setChapters(chapters,chapn);
+  const shared_ptr<Group<Multimedia>> grp = lib1.addGroup("group");
+  grp->push_back(movie);
+  grp->push_back(lib1.getFile("picture"));
   lib1.unparse(ss);
   lib1.unparse(ss);
   cerr << ss.str();

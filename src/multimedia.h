@@ -20,6 +20,8 @@ using namespace std;
  * \brief Class for generic multimedia files.
  */
 class Multimedia {
+private:
+  string id;
 protected:
   bool initialized = false; /**< true iff the path has been initialized */
   string name = string();   /**< human readable name */
@@ -30,7 +32,7 @@ protected:
    *
    * Creates an uninitialized media object.
    */
-  Multimedia() {}
+  Multimedia(const string& _id) { id = _id; }
 
   /**
    * \brief Constructor
@@ -40,7 +42,7 @@ protected:
    * \param _name: human-readable name
    * \param _path: path to media file
    */
-  Multimedia(string _name, string _path) {
+  Multimedia(string _name, string _path):Multimedia(_name) {
     name = _name;
     path = _path;
     initialized = true;
@@ -79,6 +81,13 @@ public:
    * \return The display name of the object.
    */
   string getName() const { return name; }
+
+  /**
+   * \fn string getID (void) const
+   * \brief Returns the object id.
+   * \return The object id.
+   */
+  string getID() const { return id; }
 
   /**
    * \fn int check (void) const

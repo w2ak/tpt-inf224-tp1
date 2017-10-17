@@ -27,7 +27,7 @@ protected:
    *
    * Creates an uninitialized picture object.
    */
-  Picture():Multimedia() {
+  Picture(const string& id):Multimedia(id) {
     latitude = 0;
     longitude = 0;
   }
