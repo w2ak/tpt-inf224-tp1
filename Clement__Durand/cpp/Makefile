@@ -3,7 +3,7 @@ SRV      = server
 CLI      = client
 EXE     := ${PROG} ${SRV} ${CLI}
 
-SRCDIR   = src
+SRCDIR   = .
 DOCDIR   = doc
 RLSDIR   = release
 MEDIADIR = media
@@ -51,7 +51,7 @@ LDLIBS   = -lpthread
 
 all: ${EXE}
 
-run: run-${PROG}
+run: run-${SRV}
 
 run-%: %
 	./$*
