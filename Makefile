@@ -5,7 +5,7 @@ CPPDIR:=${ROOTDIR}/cpp
 SWGDIR:=${ROOTDIR}/swing
 TGZ:=${ROOTDIR}.tar.gz
 
-all doc test:
+all doc test media:
 	make -C ${CPPDIR} $@
 
 release: ${TGZ}
