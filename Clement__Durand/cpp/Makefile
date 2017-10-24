@@ -47,11 +47,13 @@ CXXFLAGS = -std=c++11 -Wall -Werror -g
 LDFLAGS  =
 LDLIBS   = -lpthread
 
-.PHONY: all run ${DOCDIR} ${MEDIADIR} ${RLSDIR} clean cleandist
+.PHONY: all run test ${DOCDIR} ${MEDIADIR} ${RLSDIR} clean cleandist
 
 all: ${EXE}
 
 run: run-${SRV}
+
+test: run-${PROG}
 
 run-%: %
 	./$*

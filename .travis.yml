@@ -20,7 +20,7 @@ before_install:
 
 install: make media
 
-script: make && make doc && make run
+script: make && make doc && make test
 
 compiler:
   - clang
