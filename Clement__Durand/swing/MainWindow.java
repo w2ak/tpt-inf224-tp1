@@ -17,6 +17,10 @@ public class MainWindow extends JFrame {
   JScrollPane textArea;
   JPanel buttons;
 
+  JMenuBar menuBar;
+  JMenu menu;
+  JToolBar toolBar;
+
   /**
    * \brief Main Window constructor
    *
@@ -24,12 +28,16 @@ public class MainWindow extends JFrame {
    * a text field.
    */
   public MainWindow() {
+    WriteTextAction addFoo = new WriteTextAction("write foo","foo\n");
+    WriteTextAction addBar = new WriteTextAction("write bar","bar\n");
+    ExitAction doExit = new ExitAction("exit",0);
+
     buttons = new JPanel();
-    fstText = new JButton("foo");
+    fstText = new JButton(addFoo);
     buttons.add(fstText);
-    sndText = new JButton("bar");
+    sndText = new JButton(addBar);
     buttons.add(sndText);
-    exit = new JButton("exit");
+    exit = new JButton(doExit);
     buttons.add(exit);
     add(buttons, BorderLayout.SOUTH);
 
@@ -37,23 +45,15 @@ public class MainWindow extends JFrame {
     textArea = new JScrollPane(text);
     add(textArea, BorderLayout.CENTER);
 
-    fstText.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        text.append("foo\n");
-      }
-    });
+    menuBar = new JMenuBar();
+    menu = menuBar.add(new JMenu("Write"));
+    menu.add(addFoo);
+    menu.add(addBar);
+    setJMenuBar(menuBar);
 
-    sndText.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        text.append("bar\n");
-      }
-    });
-
-    exit.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        System.exit(0);
-      }
-    });
+    toolBar = new JToolBar();
+    toolBar.add(doExit);
+    add(toolBar, BorderLayout.NORTH);
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setTitle("Main Window");
@@ -63,5 +63,45 @@ public class MainWindow extends JFrame {
 
   public static void main(String[] args) {
     new MainWindow();
+  }
+
+  /**
+   * \class WriteTextAction
+   *
+   * \brief Action class for buttons writing text.
+   */
+  class WriteTextAction extends AbstractAction {
+    private static final long serialVersionUID = 1L;
+    private String txt;
+
+    public WriteTextAction(String label, String text) {
+      super(label);
+      this.txt = text;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      text.append(txt);
+    }
+  }
+
+  /**
+   * \class ExitAction
+   *
+   * \brief Action class for exit buttons.
+   */
+  class ExitAction extends AbstractAction {
+    private static final long serialVersionUID = 1L;
+    private int code;
+
+    public ExitAction(String label, int code) {
+      super(label);
+      this.code = code;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.exit(code);
+    }
   }
 }

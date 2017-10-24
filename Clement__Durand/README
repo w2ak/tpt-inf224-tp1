@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/w2ak/tpt-inf224-tp1.svg?branch=master)](https://travis-ci.org/w2ak/tpt-inf224-tp1)
 
-# tpt-inf224-tp1
+# tpt-inf224
 
 ![Télécom ParisTech][tpt]
 
@@ -12,57 +12,7 @@ TP
 
 # Building and Running
 
-## Build the program
-
-```
-make
-```
-
-## Build the documentation
-
-```
-make doc
-```
-
-## Download the media files
-
-```
-make media
-```
-
-## Run the program
-
-```
-./tp1
-```
-
-```
-make run
-```
-
-## Open the documentation
-
-```
-chromium-browser doc/html/index.html
-```
-
-## Clean build files
-
-```
-make clean
-```
-
-```
-make cleandist
-```
-
-## Create release archive
-
-```
-make release
-```
-
-# Notes about the practical
+# C++
 
 ## Step 4
 
@@ -114,3 +64,9 @@ The `Library` objects directly manage their multimedia objects. In order to keep
 `TCPLock` locks are used to prevent aberrations due to concurrency. In this case there are only read-mode lock because the implemented commands are read-only commands.
 
 In order to allow newlines in messages, they are replaced by colons which will be replaced back by newlines in the client.
+
+# Swing
+
+## Step 2
+
+By creating actions (instances of `AbstractAction`), the code is simpler and graphical elements can share the same action.
