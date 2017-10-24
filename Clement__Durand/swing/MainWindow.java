@@ -3,6 +3,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * \class MainWindow
+ * \brief Class for the Main window.
+ */
 public class MainWindow extends JFrame {
   private static final long serialVersionUID = 1L;
 
@@ -13,6 +17,12 @@ public class MainWindow extends JFrame {
   JScrollPane textArea;
   JPanel buttons;
 
+  /**
+   * \brief Main Window constructor
+   *
+   * Creates the main window with three buttons and
+   * a text field.
+   */
   public MainWindow() {
     buttons = new JPanel();
     fstText = new JButton("foo");
