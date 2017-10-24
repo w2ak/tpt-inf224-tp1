@@ -10,16 +10,7 @@ import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame {
   private static final long serialVersionUID = 1L;
 
-  JButton fstText;
-  JButton sndText;
-  JButton exit;
   JTextArea text;
-  JScrollPane textArea;
-  JPanel buttons;
-
-  JMenuBar menuBar;
-  JMenu menu;
-  JToolBar toolBar;
 
   /**
    * \brief Main Window constructor
@@ -28,33 +19,36 @@ public class MainWindow extends JFrame {
    * a text field.
    */
   public MainWindow() {
+    /* Create actions */
     WriteTextAction addFoo = new WriteTextAction("write foo","foo\n");
     WriteTextAction addBar = new WriteTextAction("write bar","bar\n");
     ExitAction doExit = new ExitAction("exit",0);
 
-    buttons = new JPanel();
-    fstText = new JButton(addFoo);
-    buttons.add(fstText);
-    sndText = new JButton(addBar);
-    buttons.add(sndText);
-    exit = new JButton(doExit);
-    buttons.add(exit);
+    /* Create buttons for the lower zone */
+    JPanel buttons = new JPanel();
+    buttons.add(new JButton(addFoo));
+    buttons.add(new JButton(addBar));
+    buttons.add(new JButton(doExit));
     add(buttons, BorderLayout.SOUTH);
 
+    /* Create a text zone */
     text = new JTextArea(5,20);
-    textArea = new JScrollPane(text);
+    JScrollPane textArea = new JScrollPane(text);
     add(textArea, BorderLayout.CENTER);
 
-    menuBar = new JMenuBar();
-    menu = menuBar.add(new JMenu("Write"));
+    /* Create the menu bar */
+    JMenuBar menuBar = new JMenuBar();
+    JMenu menu = menuBar.add(new JMenu("Write"));
     menu.add(addFoo);
     menu.add(addBar);
     setJMenuBar(menuBar);
 
-    toolBar = new JToolBar();
+    /* Create the tool bar with an exit button */
+    JToolBar toolBar = new JToolBar();
     toolBar.add(doExit);
     add(toolBar, BorderLayout.NORTH);
 
+    /* Wrap up */
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setTitle("Main Window");
     pack();
