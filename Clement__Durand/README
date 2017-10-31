@@ -12,7 +12,29 @@ TP
 
 # Building and Running
 
-# C++
+## Main folder
+
+`make all` compiles.
+
+`make media` downloads media files.
+
+`make doc` creates the doc folders in `cpp/doc` and `swing/doc`.
+
+## cpp folder
+
+`make run` compiles, **does not download the media files**, and launches the server.
+
+`make media` downloads the media files used by the server. They are small.
+
+`make doc` creates the doc folder in `doc`.
+
+## swing folder
+
+`make run` compiles and launches the swing client. **The server must be running before.**
+
+`make doc` creates the doc folder in `doc`.
+
+# C++ comments
 
 ## Step 4
 
@@ -65,8 +87,12 @@ The `Library` objects directly manage their multimedia objects. In order to keep
 
 In order to allow newlines in messages, they are replaced by colons which will be replaced back by newlines in the client.
 
-# Swing
+# Swing comments
 
 ## Step 2
 
 By creating actions (instances of `AbstractAction`), the code is simpler and graphical elements can share the same action.
+
+## Step 3
+
+With a new `JTextField`, it is simple to type search terms. A `CommandAction` sends the appropriate command to the server, and displays the output in the `JTextArea`.

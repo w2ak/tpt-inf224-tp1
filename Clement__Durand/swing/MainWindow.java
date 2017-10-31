@@ -11,6 +11,8 @@ public class MainWindow extends JFrame {
   private static final long serialVersionUID = 1L;
 
   JTextArea text;
+  JTextField textField;
+  Client c;
 
   /**
    * \brief Main Window constructor
@@ -18,17 +20,22 @@ public class MainWindow extends JFrame {
    * Creates the main window with three buttons and
    * a text field.
    */
-  public MainWindow() {
+  public MainWindow(Client c) {
+    this.c = c;
+
     /* Create actions */
     WriteTextAction addFoo = new WriteTextAction("write foo","foo\n");
     WriteTextAction addBar = new WriteTextAction("write bar","bar\n");
+    CommandAction searchFile = new CommandAction("search file","fileInfo");
+    CommandAction searchGroup = new CommandAction("search group","groupInfo");
+    CommandAction play = new CommandAction("play","play");
     ExitAction doExit = new ExitAction("exit",0);
 
     /* Create buttons for the lower zone */
     JPanel buttons = new JPanel();
-    buttons.add(new JButton(addFoo));
-    buttons.add(new JButton(addBar));
-    buttons.add(new JButton(doExit));
+    buttons.add(new JButton(searchFile));
+    buttons.add(new JButton(searchGroup));
+    buttons.add(new JButton(play));
     add(buttons, BorderLayout.SOUTH);
 
     /* Create a text zone */
@@ -36,17 +43,24 @@ public class MainWindow extends JFrame {
     JScrollPane textArea = new JScrollPane(text);
     add(textArea, BorderLayout.CENTER);
 
+    /* Create a text field */
+    textField = new JTextField(20);
+    textField.addActionListener(play);
+    add(textField, BorderLayout.NORTH);
+
     /* Create the menu bar */
+    JMenu menu = null;
     JMenuBar menuBar = new JMenuBar();
-    JMenu menu = menuBar.add(new JMenu("Write"));
+    menu = menuBar.add(new JMenu("File"));
+    menu.add(doExit);
+    menu = menuBar.add(new JMenu("Media"));
+    menu.add(searchFile);
+    menu.add(searchGroup);
+    menu.add(play);
+    menu = menuBar.add(new JMenu("Write"));
     menu.add(addFoo);
     menu.add(addBar);
     setJMenuBar(menuBar);
-
-    /* Create the tool bar with an exit button */
-    JToolBar toolBar = new JToolBar();
-    toolBar.add(doExit);
-    add(toolBar, BorderLayout.NORTH);
 
     /* Wrap up */
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +70,13 @@ public class MainWindow extends JFrame {
   }
 
   public static void main(String[] args) {
-    new MainWindow();
+    try {
+      Client c = new Client("localhost",3331);
+      new MainWindow(c);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.exit(1);
+    }
   }
 
   /**
@@ -76,6 +96,26 @@ public class MainWindow extends JFrame {
     @Override
     public void actionPerformed(ActionEvent e) {
       text.append(txt);
+    }
+  }
+
+  /**
+   * \class CommandAction
+   *
+   * \brief Sends a command to the server.
+   */
+  class CommandAction extends AbstractAction {
+    private static final long serialVersionUID = 1L;
+    private String cmd;
+
+    public CommandAction(String label, String cmd) {
+      super(label);
+      this.cmd = cmd;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      text.setText(c.send(cmd + " " + textField.getText()).replaceAll(";","\n"));
     }
   }
 
